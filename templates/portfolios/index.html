@@ -1,0 +1,27 @@
+{% extends 'base/base.html' %}
+{% block content %}
+    {%comment%}<p>Portfolio: {{portfolio_list.name}}</p>
+    <p>Properties:</p>
+    {% for property in  portfolio_list.property_set.all %}
+
+    <div class="card" style="width: 18rem;">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQDpJ8Zz2YsEU18oSTvBj6-m8o9Om974DJ69xMjMWlRBSw14yDX" class="card-img-top" alt="No Image available">
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <a href="{% url 'portfolios:portfolio_view' portfolio_list.id %}" class="btn btn-primary">View</a>
+        </div>
+      </div>
+
+    <span class="card">
+        <p>{{ property.address.line1 }}</p>
+        <p>{{ property.address.line2 }}</p>
+        <p>{{ property.address.line3 }}</p>
+        <p>{{ property.address.post_code }}</p>
+        <p>{{ property.address.town }}</p>
+        <p>{{ property.address.city }}</p>
+    </span>{%endcomment%}
+    
+    {% endfor %}
+    
+{% endblock %}

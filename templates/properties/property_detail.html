@@ -1,0 +1,8 @@
+{% extends 'base/base.html' %}
+{% block content %}
+    <p>{{object.address.line1}}</p>
+
+    {% for tenant in property.tenant_set.all %}
+        {{tenant.first_name}}
+    {% endfor %}
+{% endblock %}
