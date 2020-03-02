@@ -4,6 +4,7 @@ from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from .models import Property
+from .forms import PropertyAddressFormSet
 import logging
 
 logger = logging.getLogger(__name__)
@@ -32,7 +33,7 @@ class PropertyView(DetailView):
 
 class PropertyCreate(CreateView):
 	model = Property
-	fields = ['address']
+	form_class=PropertyAddressFormSet
 	success_url = reverse_lazy('Property_list')
 
 	def get_context_data(self, **kwargs):

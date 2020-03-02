@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 class Property(models.Model):
-    address=models.ForeignKey("Address", on_delete=models.CASCADE)
+    #address=models.OneToOneField("Address", on_delete=models.CASCADE)
     portfolio = models.ForeignKey("portfolios.Portfolio", on_delete=models.CASCADE)
 
     class Meta:
@@ -30,6 +30,7 @@ class PropertyDocument(models.Model):
 
 
 class Address(models.Model):
+    property = models.ForeignKey("Property", on_delete=models.CASCADE)
     line1 = models.CharField(max_length=100)
     line2 = models.CharField(max_length=100, null=True, blank=True)
     line3 = models.CharField(max_length=100, null=True, blank=True)
