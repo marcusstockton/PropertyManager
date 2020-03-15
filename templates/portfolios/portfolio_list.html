@@ -2,7 +2,6 @@
 {% block content %}
 <div>
     <a class="btn btn-primary" href="{% url 'portfolios:portfolio_new' %}">Add Portfolio</a>
-    
 </div>
 <div>
     {% for portfolio in object_list %}
@@ -10,22 +9,34 @@
     <a class="btn btn-primary" href="{% url 'properties:property_new' portfolio_id=portfolio.id %}">Add Property</a>
     <tr>
         <td class="col-sm-8">{{ portfolio.name }}</td>
-        {% for property in portfolio.property_set.all %}
-        
-            <div class="card" style="width: 18rem;">
-                {% if not property.propertyimage_set.all%}
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQDpJ8Zz2YsEU18oSTvBj6-m8o9Om974DJ69xMjMWlRBSw14yDX" class="card-img-top" alt="No Image available">
-                {% else %}
-                    <img src="{{ media_url }}{{ property.propertyimage_set.first }}" class="card-img-top" alt="{{property.propertyimage_set.first.name }}" title="{{property.propertyimage_set.first.name }}">
-                {% endif %}
-                
-                <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="{% url 'properties:property_view' portfolio_id=portfolio.id pk=property.id %}" class="btn btn-primary">View</a>
+        <div class="row">
+            <div class="card-group">
+                {% for property in portfolio.property_set.all %}
+
+                <div class="card" style="width: 18rem;">
+                    {% if not property.propertyimage_set.all %}
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQDpJ8Zz2YsEU18oSTvBj6-m8o9Om974DJ69xMjMWlRBSw14yDX"
+                        class="card-img-top" alt="No Image available">
+                    {% else %}
+                    <img src="{{ MEDIA_URL }}{{ property.propertyimage_set.first }}" class="card-img-top"
+                        alt="{{property.propertyimage_set.first.name }}"
+                        title="{{property.propertyimage_set.first.name }}">
+                    {% endif %}
+
+                    <div class="card-body">
+                        <h5 class="card-title">Card Title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the card's content.</p>
+                        <a href="{% url 'properties:property_view' portfolio_id=portfolio.id pk=property.id %}"
+                            class="btn btn-primary">View</a>
+                        <a href="{% url 'properties:property_delete' portfolio_id=portfolio.id pk=property.id %}"
+                            class="btn btn-danger">Delete</a>
+                    </div>
                 </div>
+
+                {% endfor %}
             </div>
-        {% endfor %}
+        </div>
         <td><a href="{% url 'portfolios:portfolio_view' portfolio.id %}" class="btn btn-primary">View</a></td>
         <td><a href="{% url 'portfolios:portfolio_edit' portfolio.id %}" class="btn btn-info">Edit</a></td>
         <td><a href="{% url 'portfolios:portfolio_delete' portfolio.id %}" class="btn btn-danger">Delete</a></td>
@@ -35,6 +46,4 @@
     {% endfor %}
 </div>
 
-
-
-{% endblock %}
+{% endblock content %}

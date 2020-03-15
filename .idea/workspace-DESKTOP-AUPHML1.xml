@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="7e67b02b-0fa8-444a-b0de-7bb81d537857" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vscode/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/.vscode/settings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolios/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/portfolios/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolios/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/portfolios/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/properties/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/properties/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/properties/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/properties/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/properties/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/properties/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/property_manager/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/property_manager/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/portfolios/portfolio_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/portfolios/portfolio_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/properties/property_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/properties/property_form.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tenant/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/tenant/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tenant/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/tenant/views.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1YosOVlko2j9sXbWqSSgKvjusNy" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/manage.py" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.build" />
+  </component>
+  <component name="PyConsoleOptionsProvider">
+    <option name="myPythonConsoleState">
+      <console-settings module-name="property_manager" is-module-sdk="true">
+        <option name="myUseModuleSdk" value="true" />
+        <option name="myModuleName" value="property_manager" />
+      </console-settings>
+    </option>
+    <option name="myUseExistingConsole" value="true" />
+  </component>
+  <component name="RunManager">
+    <configuration name="Django" type="PythonConfigurationType" factoryName="Python">
+      <module name="property_manager" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Venvs\Python381\Scripts\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/manage.py" />
+      <option name="PARAMETERS" value="runserver" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <module name="property_manager" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Venvs\Python381\Scripts\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/manage.py" />
+      <option name="PARAMETERS" value="runserver" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7e67b02b-0fa8-444a-b0de-7bb81d537857" name="Default Changelist" comment="" />
+      <created>1583620249584</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1583620249584</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="414" y="179" width="1092" height="707" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1583620569179">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="414" y="179" width="1092" height="707" key="#com.intellij.execution.impl.EditConfigurationsDialog/1920.0.1920.1050/0.0.1920.1050@0.0.1920.1050" timestamp="1583620569179" />
+    <state x="525" y="119" key="CommitChangelistDialog2" timestamp="1583620765734">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="525" y="119" key="CommitChangelistDialog2/1920.0.1920.1050/0.0.1920.1050@0.0.1920.1050" timestamp="1583620765734" />
+    <state x="739" y="279" key="FileChooserDialogImpl" timestamp="1583620535514">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="739" y="279" key="FileChooserDialogImpl/1920.0.1920.1050/0.0.1920.1050@0.0.1920.1050" timestamp="1583620535514" />
+    <state width="1899" height="352" key="GridCell.Tab.0.bottom" timestamp="1583624119896">
+      <screen x="1920" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1899" height="352" key="GridCell.Tab.0.bottom/1920.0.1920.1050/0.0.1920.1050@1920.0.1920.1050" timestamp="1583624119896" />
+    <state width="1899" height="352" key="GridCell.Tab.0.center" timestamp="1583624119896">
+      <screen x="1920" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1899" height="352" key="GridCell.Tab.0.center/1920.0.1920.1050/0.0.1920.1050@1920.0.1920.1050" timestamp="1583624119896" />
+    <state width="1899" height="352" key="GridCell.Tab.0.left" timestamp="1583624119895">
+      <screen x="1920" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1899" height="352" key="GridCell.Tab.0.left/1920.0.1920.1050/0.0.1920.1050@1920.0.1920.1050" timestamp="1583624119895" />
+    <state width="1899" height="352" key="GridCell.Tab.0.right" timestamp="1583624119896">
+      <screen x="1920" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1899" height="352" key="GridCell.Tab.0.right/1920.0.1920.1050/0.0.1920.1050@1920.0.1920.1050" timestamp="1583624119896" />
+    <state width="1899" height="352" key="GridCell.Tab.1.bottom" timestamp="1583624119896">
+      <screen x="1920" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1899" height="352" key="GridCell.Tab.1.bottom/1920.0.1920.1050/0.0.1920.1050@1920.0.1920.1050" timestamp="1583624119896" />
+    <state width="1899" height="352" key="GridCell.Tab.1.center" timestamp="1583624119896">
+      <screen x="1920" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1899" height="352" key="GridCell.Tab.1.center/1920.0.1920.1050/0.0.1920.1050@1920.0.1920.1050" timestamp="1583624119896" />
+    <state width="1899" height="352" key="GridCell.Tab.1.left" timestamp="1583624119896">
+      <screen x="1920" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1899" height="352" key="GridCell.Tab.1.left/1920.0.1920.1050/0.0.1920.1050@1920.0.1920.1050" timestamp="1583624119896" />
+    <state width="1899" height="352" key="GridCell.Tab.1.right" timestamp="1583624119896">
+      <screen x="1920" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1899" height="352" key="GridCell.Tab.1.right/1920.0.1920.1050/0.0.1920.1050@1920.0.1920.1050" timestamp="1583624119896" />
+    <state x="2381" y="167" key="SettingsEditor" timestamp="1583622287480">
+      <screen x="1920" y="0" width="1920" height="1050" />
+    </state>
+    <state x="461" y="167" key="SettingsEditor/1920.0.1920.1050/0.0.1920.1050@0.0.1920.1050" timestamp="1583620441563" />
+    <state x="2381" y="167" key="SettingsEditor/1920.0.1920.1050/0.0.1920.1050@1920.0.1920.1050" timestamp="1583622287480" />
+    <state x="661" y="348" key="com.intellij.ide.util.TipDialog" timestamp="1583622157437">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="661" y="348" key="com.intellij.ide.util.TipDialog/1920.0.1920.1050/0.0.1920.1050@0.0.1920.1050" timestamp="1583622157437" />
+    <state x="2576" y="123" width="607" height="804" key="find.popup" timestamp="1583623185235">
+      <screen x="1920" y="0" width="1920" height="1050" />
+    </state>
+    <state x="2576" y="123" width="607" height="804" key="find.popup/1920.0.1920.1050/0.0.1920.1050@1920.0.1920.1050" timestamp="1583623185235" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/properties/views.py</url>
+          <line>47</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

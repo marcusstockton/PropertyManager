@@ -2,9 +2,46 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
+<span>
+{% if messages %}
+    {% for message in messages %}
+        alert(message);
+    {% endfor %}
+{% endif %}
+</span>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form |crispy }}
+    {{ address | crispy }}
+    
+<fieldset class="border p-2">
+    <legend class="w-auto">Images</legend>
+    {{ images.management_form }}
+    {% for form in images.forms %}
+    <div >
+        {{ form.as_p }}
+    </div>
+    {% endfor %}
+    </fieldset>
 
-<form method="post">{% csrf_token %}
-    {{ form | crispy }}
+<fieldset class="border p-2">
+    <legend class="w-auto">Documents</legend>
+    {{ documents.management_form }}
+    {% for form in documents.forms %}
+    <div >
+        {{ form.as_table }}
+    </div>
+    {% endfor %}
+</fieldset>
+
+    <!-- {{ property | crispy }}
+    {{ address | crispy }}
+
+    {{ images.management_form }}
+    {{ images | crispy }}
+
+    {{ docs.management_form }}
+    {{ docs | crispy }} -->
     <input type="submit" value="Submit" class="btn btn-primary" />
     <button class="btn btn-link" onclick="javascript:history.back();">Cancel</button>
 </form>
