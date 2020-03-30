@@ -41,18 +41,18 @@ class PropertyView(DetailView):
 class PropertyCreate(CreateView):
 	model = Property
 	form_class = PropertyForm
-	success_url = reverse_lazy('properties:property_list')
+	success_url = reverse_lazy('portfolios:portfolio_list')
 
 	def get_context_data(self, **kwargs):
 		data = super(PropertyCreate, self).get_context_data(**kwargs)
 		if self.request.POST:
 			data['address'] = AddressForm(self.request.POST)
 			data['images'] = PropertyImageFormSet(self.request.POST, self.request.FILES, instance=self.object)
-			data['documents'] = PropertyDocumentFormSet(self.request.POST. self.request.FILES, instance=self.object)
+			data['documents'] = PropertyDocumentFormSet(self.request.POST, self.request.FILES, instance=self.object)
 		else:
 			data['address'] = AddressForm()
-			data['images'] = PropertyImageFormSet()
-			data['documents'] = PropertyDocumentFormSet()
+			data['images'] = PropertyImageFormSet(instance=self.object)
+			data['documents'] = PropertyDocumentFormSet(instance=self.object)
 		return data
 
 	def form_valid(self, form):
@@ -62,6 +62,7 @@ class PropertyCreate(CreateView):
 		documents = data['documents']
 		with transaction.atomic():
 			if form.is_valid() and address.is_valid() and images.is_valid() and documents.is_valid():
+				# Property
 				self.object = form.save()
 				# Address
 				address.instance = self.object

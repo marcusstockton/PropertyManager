@@ -22,15 +22,15 @@ class PortfolioView(DetailView):
 class PortfolioCreate(CreateView):
     model = Portfolio
     fields = ['name']
-    success_url = reverse_lazy('portfolio_list')
+    success_url = reverse_lazy('portfolios:portfolio_list')
 
 
 class PortfolioUpdate(UpdateView):
     model = Portfolio
     fields = ['name']
-    success_url = reverse_lazy('portfolio_list')
+    success_url = reverse_lazy('portfolios:portfolio_list')
 
 
 class PortfolioDelete(DeleteView):
     model = Portfolio
-    success_url = reverse_lazy('portfolio_list')
+    success_url = reverse_lazy('portfolios:portfolio_list')

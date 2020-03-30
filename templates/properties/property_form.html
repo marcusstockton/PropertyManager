@@ -3,47 +3,66 @@
 
 {% block content %}
 <span>
-{% if messages %}
+    {% if messages %}
     {% for message in messages %}
-        alert(message);
+    alert(message);
     {% endfor %}
-{% endif %}
+    {% endif %}
 </span>
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form |crispy }}
     {{ address | crispy }}
-    
-<fieldset class="border p-2">
-    <legend class="w-auto">Images</legend>
-    {{ images.management_form }}
-    {% for form in images.forms %}
-    <div >
-        {{ form.as_p }}
-    </div>
-    {% endfor %}
+
+    <fieldset class="border p-2">
+        <legend class="w-auto">Images</legend>
+        {{ images.management_form }}
+        {% for form in images.forms %}
+        <div>
+            {{ form.as_p }}
+        </div>
+        {% endfor %}
     </fieldset>
 
-<fieldset class="border p-2">
-    <legend class="w-auto">Documents</legend>
-    {{ documents.management_form }}
-    {% for form in documents.forms %}
-    <div >
-        {{ form.as_table }}
-    </div>
-    {% endfor %}
-</fieldset>
+    <fieldset class="border p-2" id="form_set">
+        <legend class="w-auto">Documents</legend>
 
-    <!-- {{ property | crispy }}
-    {{ address | crispy }}
+        <button id="add_more" class="float-right btn btn-primary btn-sm" title="Add document"><i
+                class="far fa-plus-square"></i></button>
+        {{ documents.management_form }}
+        <div id="form_set">
+            {% for form in documents.forms %}
+            <table>
+                {{ form.as_table }}
+            </table>
+            {% endfor %}
+        </div>
+        <div id="empty_form" style="display:none">
+            <table>
+                {{ documents.empty_form.as_table }}
+            </table>
+        </div>
 
-    {{ images.management_form }}
-    {{ images | crispy }}
-
-    {{ docs.management_form }}
-    {{ docs | crispy }} -->
+    </fieldset>
     <input type="submit" value="Submit" class="btn btn-primary" />
+
     <button class="btn btn-link" onclick="javascript:history.back();">Cancel</button>
 </form>
-
 {% endblock %}
+
+
+{% block script %}
+{{ block.super }}
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('#add_more').click(function (e) {
+            e.preventDefault();
+            var form_idx = $('#id_propertydocument_set-TOTAL_FORMS').val();
+            $('#form_set').append($('#empty_form').html().replace(/__prefix__/g, form_idx));
+            $('#id_propertydocument_set-TOTAL_FORMS').val(parseInt(form_idx) + 1);
+        });
+
+    });
+</script>
+{% endblock script %}

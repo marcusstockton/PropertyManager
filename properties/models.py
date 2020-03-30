@@ -3,6 +3,8 @@ from django.db import models
 
 class Property(models.Model):
     portfolio = models.ForeignKey("portfolios.Portfolio", on_delete=models.CASCADE)
+    purchase_date = models.DateField(null=True)
+    purchase_value = models.DecimalField(max_digits=10, decimal_places=2)
 
     class Meta:
         verbose_name_plural = "Properties"

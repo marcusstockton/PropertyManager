@@ -28,12 +28,6 @@ class PropertyForm(ModelForm):
     class Meta:
         model = Property
         exclude = ()
-PropertyAddressFormSet = inlineformset_factory(
-    parent_model=Property,
-    model=Address,
-    form=AddressForm,
-    extra=1
-)
 
 PropertyDocumentFormSet = inlineformset_factory(
     parent_model=Property,
