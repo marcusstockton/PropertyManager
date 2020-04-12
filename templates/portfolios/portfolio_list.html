@@ -13,11 +13,12 @@
                     Property</a>
             </span>
         </span>
-        <div class="row">
+        <div>
             <div class="col-sm-8"><strong>{{ portfolio.name }}</strong></div>
             <div class="row">
+                {% for property in portfolio.property_set.all %}
                 <div class="card-group">
-                    {% for property in portfolio.property_set.all %}
+                   
 
                     <div class="card" style="width: 18rem;">
                         {% if not property.propertyimage_set.all %}
