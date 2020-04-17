@@ -4,9 +4,9 @@
 {% block content %}
 <span>
     {% if messages %}
-    {% for message in messages %}
-    alert(message);
-    {% endfor %}
+        {% for message in messages %}
+            alert(message);
+        {% endfor %}
     {% endif %}
 </span>
 <form method="post" enctype="multipart/form-data">
@@ -18,9 +18,9 @@
         <legend class="w-auto">Images</legend>
         {{ images.management_form }}
         {% for form in images.forms %}
-        <div>
-            {{ form.as_p }}
-        </div>
+            <div>
+                {{ form.as_p }}
+            </div>
         {% endfor %}
     </fieldset>
 
@@ -32,9 +32,9 @@
         {{ documents.management_form }}
         <div id="form_set">
             {% for form in documents.forms %}
-            <table>
-                {{ form.as_table }}
-            </table>
+                <table>
+                    {{ form.as_table }}
+                </table>
             {% endfor %}
         </div>
         <div id="empty_form" style="display:none">

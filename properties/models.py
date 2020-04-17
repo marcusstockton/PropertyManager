@@ -1,5 +1,5 @@
 from django.db import models
-
+import os
 
 class Property(models.Model):
     portfolio = models.ForeignKey("portfolios.Portfolio", on_delete=models.CASCADE)
@@ -31,8 +31,13 @@ class PropertyDocument(models.Model):
     document = models.FileField(upload_to=property_docs_upload_to)
     document_type = models.ForeignKey("DocumentType", on_delete=models.CASCADE)
     expiry_date = models.DateField(auto_now=False, auto_now_add=False, blank=True, null=True)
+    
     def __str__(self):
         return self.document.name
+
+    def filename(self):
+        return os.path.basename(self.document.name)
+
 
 class DocumentType(models.Model):
     description = models.CharField(max_length=100)

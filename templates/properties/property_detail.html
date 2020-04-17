@@ -1,8 +1,37 @@
 {% extends 'base/base.html' %}
 {% block content %}
-    <p>{{object.address.line1}}</p>
 
-    {% for tenant in property.tenant_set.all %}
-        {{tenant.first_name}}
-    {% endfor %}
+    <div>
+        <p>{{object.address.line1}}</p>
+        <p>{{object.address.line2}}</p>
+        <p>{{object.address.line3}}</p>
+        <p>{{object.address.post_code}}</p>
+        <p>{{object.address.town}}</p>
+        <p>{{object.address.city}}</p>
+    </div>
+    <div>
+        {% for tenant in property.tenant_set.all %}
+            {{tenant.title}}
+            {{tenant.first_name}}
+            {{tenant.last_name}}
+            {{tenant.occupation}}
+            {{tenant.tenancy_start}}
+            {{tenant.tenancy_end}}
+            {{tenant.date_of_birth}}
+        {% endfor %}
+    </div>
+
+    <div>
+        {% for doc in property.propertydocument_set.all %}
+        <div>
+            <a href="{{ MEDIA_URL }}{{doc.document.url}}">{{doc.filename}}</a>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div>
+        {%for image in property.propertyimage_set.all %}
+            <img class="col-sm-4 img-fluid img-thumbnail" src="{{ image.image.url }}" alt="image.image">
+        {% endfor %}
+    </div>
 {% endblock %}

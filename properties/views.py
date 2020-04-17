@@ -6,7 +6,7 @@ from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.db import transaction
-from .models import Property
+from .models import Property, Address
 from portfolios.models import Portfolio
 from .forms import AddressForm, PropertyForm, PropertyDocumentFormSet, PropertyImageFormSet
 import logging
@@ -33,6 +33,7 @@ class PropertyView(DetailView):
 	def get_context_data(self, **kwargs):
 		data = super(PropertyView, self).get_context_data(**kwargs)
 		data["portfolio"] = self.kwargs["portfolio_id"]
+		data['address'] = Address.objects.filter(property = data["property"].id)
 
 		logger.info(data['portfolio'])
 		return data
