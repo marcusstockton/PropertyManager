@@ -1,1 +1,3 @@
 /media_cdn/
+**/*.pyc
+*/__pycache__/*

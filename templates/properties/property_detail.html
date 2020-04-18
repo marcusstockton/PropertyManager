@@ -1,16 +1,56 @@
 {% extends 'base/base.html' %}
+{% load l10n %}
+{% load project_tags %}
 {% block content %}
 
     <div>
-        <p>{{object.address.line1}}</p>
-        <p>{{object.address.line2}}</p>
-        <p>{{object.address.line3}}</p>
-        <p>{{object.address.post_code}}</p>
-        <p>{{object.address.town}}</p>
-        <p>{{object.address.city}}</p>
+    <fieldset class="border p-2">
+        <legend class="w-auto">Purchase Info</legend>
+        <dl class="row">
+            <dt class="col-sm-3">Date Purchased</dt>
+            <dd class="col-sm-9">{{object.purchase_date}}</dd>
+
+            <dt class="col-sm-3">Purchase Price</dt>
+            <dd class="col-sm-9">{{object.purchase_value | currency  }}</dd>
+        </dl>
+    </fieldset>
+    
+        
     </div>
     <div>
-        {% for tenant in property.tenant_set.all %}
+        {% if object.address %}
+        
+        <fieldset class="border p-2">
+            <legend class="w-auto">Address</legend>
+            <dl class="row">
+                <dt class="col-sm-3">Line 1</dt>
+                <dd class="col-sm-9">{{object.address.line1}}</dd>
+
+                <dt class="col-sm-3">Line 2</dt>
+                <dd class="col-sm-9">{{object.address.line2|default_if_none:""}}</dd>
+
+                <dt class="col-sm-3">Line 3</dt>
+                <dd class="col-sm-9">{{object.address.line3|default_if_none:""}}</dd>
+
+                <dt class="col-sm-3">Post Code</dt>
+                <dd class="col-sm-9">{{object.address.post_code}}</dd>
+
+                <dt class="col-sm-3">Town</dt>
+                <dd class="col-sm-9">{{object.address.town|default_if_none:""}}</dd>
+
+                <dt class="col-sm-3">City</dt>
+                <dd class="col-sm-9">{{object.address.city|default_if_none:""}}</dd>
+            </dl>
+        </fieldset>
+            
+
+        {% else %}
+            <p>No Address details found.</p>
+        {% endif %}
+    </div>
+    {% if property.tenant_set.all%}
+    <div>
+        {% for tenant in property.tenant_set.all.order_by__tenancy_start %}
             {{tenant.title}}
             {{tenant.first_name}}
             {{tenant.last_name}}
@@ -20,18 +60,32 @@
             {{tenant.date_of_birth}}
         {% endfor %}
     </div>
+    {% else %}
+    <p>No Tenants</p>
+    {% endif %}
 
+    {% if property.propertydocument_set.all %}
     <div>
+        <h5>{{property.propertydocument_set.count}} Documents</h5>
         {% for doc in property.propertydocument_set.all %}
         <div>
             <a href="{{ MEDIA_URL }}{{doc.document.url}}">{{doc.filename}}</a>
         </div>
         {% endfor %}
     </div>
+    {% endif %}
 
+
+    {% if property.propertyimage_set.all %}
     <div>
+        <h5>Images</h5>
         {%for image in property.propertyimage_set.all %}
             <img class="col-sm-4 img-fluid img-thumbnail" src="{{ image.image.url }}" alt="image.image">
         {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="row">
+        <a href="{% url 'properties:property_edit' object.portfolio.id object.id %}" class="btn btn-info">Edit</a>
     </div>
 {% endblock %}

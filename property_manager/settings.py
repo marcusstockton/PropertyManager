@@ -70,6 +70,10 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',
             ],
+            # Look for base templatetags at root of project
+            'libraries': {
+                'project_tags': 'templatetags.currency',
+            }
         },
     },
 ]
@@ -119,6 +123,7 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+USE_THOUSAND_SEPARATOR = True
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 

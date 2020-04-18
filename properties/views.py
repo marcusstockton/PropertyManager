@@ -119,12 +119,41 @@ class PropertyCreate(CreateView):
 
 class PropertyUpdate(UpdateView):
 	model = Property
-	fields = ['address']
+	form_class = PropertyForm
 	success_url = reverse_lazy('properties:property_list')
 
 	def get_context_data(self, **kwargs):
 		data = super(PropertyUpdate, self).get_context_data(**kwargs)
+		if self.request.POST:
+			data['address'] = AddressForm(self.request.POST, instance=self.object)
+			data['images'] = PropertyImageFormSet(self.request.POST, self.request.FILES, instance=self.object)
+			data['documents'] = PropertyDocumentFormSet(self.request.POST, self.request.FILES, instance=self.object)
+		else:
+			data['address'] = AddressForm(instance=self.object)
+			data['images'] = PropertyImageFormSet(instance=self.object)
+			data['documents'] = PropertyDocumentFormSet(instance=self.object)
 		return data
+
+	def form_valid(self, form):
+		data = self.get_context_data()
+		address = data["address"]
+		images = data["images"]
+		documents = data['documents']
+		with transaction.atomic():
+			if form.is_valid() and address.is_valid() and images.is_valid() and documents.is_valid():
+				# Property
+				self.object = form.save()
+				# Address
+				address.instance = self.object
+				address.save()
+				#Images
+				images.instance = self.object
+				images.save()
+				# Documents
+				documents.instance = self.object
+				documents.save()
+
+		return super(PropertyCreate, self).form_valid(form)
 
 
 class PropertyDelete(DeleteView):
