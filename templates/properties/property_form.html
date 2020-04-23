@@ -12,7 +12,7 @@
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form |crispy }}
-    {{ address | crispy }}
+    {{ address |crispy }}
 
     <fieldset class="border p-2">
         <legend class="w-auto">Images</legend>

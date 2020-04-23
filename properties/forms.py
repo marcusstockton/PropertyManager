@@ -36,7 +36,7 @@ class PropertyForm(ModelForm):
         model = Property
         exclude = (),
         widgets = {
-            'purchase_date': DateInput(),
+            'purchase_date': DateInput(format='%Y-%m-%d', attrs={'type': 'date'}),
         }
 
 

@@ -33,7 +33,7 @@ class PropertyView(DetailView):
 	def get_context_data(self, **kwargs):
 		data = super(PropertyView, self).get_context_data(**kwargs)
 		data["portfolio"] = self.kwargs["portfolio_id"]
-		data['address'] = Address.objects.filter(property = data["property"].id)
+		data['address'] = Address.objects.filter(property=data["property"].id).first()
 
 		logger.info(data['portfolio'])
 		return data
@@ -68,7 +68,7 @@ class PropertyCreate(CreateView):
 				# Address
 				address.instance = self.object
 				address.save()
-				#Images
+				# Images
 				images.instance = self.object
 				images.save()
 				# Documents
@@ -77,45 +77,6 @@ class PropertyCreate(CreateView):
 
 		return super(PropertyCreate, self).form_valid(form)
 		
-
-# def property_create(request, portfolio_id):
-# 	portfolio = Portfolio.objects.get(pk=portfolio_id)
-# 	if request.method == 'POST':
-# 		property_form = PropertyForm(request.POST)
-# 		address_form = AddressForm(request.POST)
-# 		property_images_form = PropertyImageFormSet(request.POST, request.FILES, prefix='images')
-# 		property_documents_form = PropertyDocumentFormSet(request.POST, request.FILES, prefix='docs')
-# 		if property_form.is_valid() and address_form.is_valid() and property_images_form.is_valid() \
-# 				and property_documents_form.is_valid():
-# 			# Save Property
-# 			new_property = property_form.save(commit=False)
-# 			new_property.portfolio = portfolio
-# 			new_property.save()
-
-# 			# Save Address
-# 			property_address = address_form.save(commit=False)
-# 			property_address.property = new_property
-# 			property_address.save()
-			
-# 			# Save images
-# 			images = property_images_form.save(commit=False)
-# 			images.property = new_property
-# 			images.save()
-
-# 			# Save Documents
-# 			property_documents_form.save()
-
-# 			messages.add_message(request, messages.SUCCESS, 'Property Added!')
-# 			return HttpResponseRedirect(reverse_lazy('properties:property_list'))
-# 		else:
-# 			messages.error(request, "Error")
-# 	else:
-# 		property_form = PropertyForm(initial={'portfolio': portfolio})
-# 		address_form = AddressForm()
-# 		property_images_form = PropertyImageFormSet(prefix='images')
-# 		property_documents_form = PropertyDocumentFormSet(prefix='docs')
-# 		return render(request, 'properties/property_form.html', {'property': property_form, "address": address_form, "images": property_images_form, "docs": property_documents_form})
-
 
 class PropertyUpdate(UpdateView):
 	model = Property
@@ -129,10 +90,11 @@ class PropertyUpdate(UpdateView):
 			data['images'] = PropertyImageFormSet(self.request.POST, self.request.FILES, instance=self.object)
 			data['documents'] = PropertyDocumentFormSet(self.request.POST, self.request.FILES, instance=self.object)
 		else:
-			data['address'] = AddressForm(instance=self.object)
+			data['address'] = AddressForm(instance=Address.objects.filter(property=self.object.id).first())
 			data['images'] = PropertyImageFormSet(instance=self.object)
 			data['documents'] = PropertyDocumentFormSet(instance=self.object)
 		return data
+
 
 	def form_valid(self, form):
 		data = self.get_context_data()
@@ -146,7 +108,7 @@ class PropertyUpdate(UpdateView):
 				# Address
 				address.instance = self.object
 				address.save()
-				#Images
+				# Images
 				images.instance = self.object
 				images.save()
 				# Documents
