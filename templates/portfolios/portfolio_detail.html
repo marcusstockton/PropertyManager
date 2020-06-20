@@ -1,6 +1,49 @@
 {% extends 'base/base.html' %}
 {% block content %}
-    <p>{{object.name}}</p>
+<p>{{object.name}}</p>
 
-    <button class="btn btn-link" onclick="javascript:history.back();">Back</button>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Address</th>
+        <th scope="col">Purchase Date</th>
+        <th scope="col">Purchase Value</th>
+        <th scope="col">Rental Price</th>
+        <th scope="col"># Of Rooms</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for property in object.property_set.all %}
+    <tr>
+        <th scope="row">{{property.id}}</th>
+        <td>{{property.address.line1}}
+            {{property.address.line2|default:""}}
+            {{property.address.line3|default:""}}
+            {{property.address.postcode|default:""}}
+            {{property.address.town|default:""}}
+            {{property.address.city|default:""}}
+        </td>
+        <td>{{property.purchase_date}}</td>
+        <td>{{property.purchase_value}}</td>
+        <td>{{property.rental_price}}</td>
+        <td>{{property.number_of_rooms}}</td>
+        <td>
+            <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
+                <div class="btn-group" role="group" aria-label="First group">
+                    <a href="{% url 'properties:property_view' portfolio_id=portfolio.id pk=property.id %}"
+                       class="btn btn-primary">View</a>
+                    <a href="{% url 'properties:property_delete' portfolio_id=portfolio.id pk=property.id %}"
+                       class="btn btn-danger">Delete</a>
+
+                </div>
+            </div>
+        </td>
+    </tr>
+    {% endfor%}
+    </tbody>
+</table>
+
+<button class="btn btn-link" onclick="javascript:history.back();">Back</button>
 {% endblock %}

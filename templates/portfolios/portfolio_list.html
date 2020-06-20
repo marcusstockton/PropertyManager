@@ -1,63 +1,40 @@
 {% extends 'base/base.html' %}
 {% block content %}
-<div class="row">
-    <a class="btn btn-primary" href="{% url 'portfolios:portfolio_new' %}">Add Portfolio</a>
-</div>
+
 <div>
-    {% for portfolio in object_list %}
-    <div>
-        <p>Portfolio Id: {{portfolio.id}}</p>
-        <span class="row">
-            <span class="float-right">
-                <a class="btn btn-primary" href="{% url 'properties:property_new' portfolio_id=portfolio.id %}">Add
-                    Property</a>
-            </span>
-        </span>
-        <div>
-            <div class="col-sm-8"><strong>{{ portfolio.name }}</strong></div>
-            <div class="row">
-                {% for property in portfolio.property_set.all %}
-                <div class="card-group">
-                   
-
-                    <div class="card" style="width: 18rem;">
-                        {% if not property.propertyimage_set.all %}
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQDpJ8Zz2YsEU18oSTvBj6-m8o9Om974DJ69xMjMWlRBSw14yDX"
-                            class="card-img-top" alt="No Image available">
-                        {% else %}
-                        <img src="{{ MEDIA_URL }}{{ property.propertyimage_set.first }}" class="card-img-top"
-                            alt="{{property.propertyimage_set.first.name }}"
-                            title="{{property.propertyimage_set.first.name }}">
-                        {% endif %}
-
-                        <div class="card-body">
-                            <h5 class="card-title">{{property.address.line1}} {{property.address.line2}}
-                                {{property.address.line3}}</h5>
-                            <p class="card-text">{{property.address.post_code}} {{property.address.town}}
-                                {{proprty.address.city}} </p>
-                            <p class="card-text">{{property.purchase_date}} {{property.purchase_value}}</p>
-                            <a href="{% url 'properties:property_view' portfolio_id=portfolio.id pk=property.id %}"
-                                class="btn btn-primary">View</a>
-                            <a href="{% url 'properties:property_delete' portfolio_id=portfolio.id pk=property.id %}"
-                                class="btn btn-danger">Delete</a>
-                        </div>
+    <div class="row">
+        <a class="btn btn-primary" href="{% url 'portfolios:portfolio_new' %}">Add Portfolio</a>
+    </div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Property Count</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for portfolio in object_list %}
+        <tr>
+            <th scope="row">{{portfolio.id}}</th>
+            <td>{{portfolio.name}}</td>
+            <td>{{portfolio.property_set.all|length}}</td>
+            <td>
+                <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
+                    <div class="btn-group" role="group" aria-label="First group">
+                        <a class="btn btn-primary" href="{% url 'properties:property_new' portfolio_id=portfolio.id %}">Add
+                            Property</a>
+                        <a href="{% url 'portfolios:portfolio_view' portfolio.id %}" class="btn btn-primary">View</a>
+                        <a href="{% url 'portfolios:portfolio_edit' portfolio.id %}" class="btn btn-info">Edit</a>
+                        <a href="{% url 'portfolios:portfolio_delete' portfolio.id %}" class="btn btn-danger">Delete</a>
                     </div>
                 </div>
-                {% endfor %}
-            </div>
-            <div class="row">
-                <a href="{% url 'portfolios:portfolio_view' portfolio.id %}" class="btn btn-primary">View</a>
-                <a href="{% url 'portfolios:portfolio_edit' portfolio.id %}" class="btn btn-info">Edit</a>
-                <a href="{% url 'portfolios:portfolio_delete' portfolio.id %}" class="btn btn-danger">Delete</a>
-            </div>
-        </div>
-        
-        {% empty %}
-        <li>No portfolio's yet.</li>
-
-    </div>
-
-    {% endfor %}
+            </td>
+        </tr>
+        {% endfor%}
+        </tbody>
+    </table>
 </div>
 
 {% endblock content %}

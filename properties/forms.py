@@ -34,7 +34,7 @@ class PropertyForm(ModelForm):
     """ Edit a property """
     class Meta:
         model = Property
-        exclude = (),
+        exclude = ('address'),
         widgets = {
             'purchase_date': DateInput(format='%Y-%m-%d', attrs={'type': 'date'}),
         }
@@ -44,7 +44,7 @@ PropertyDocumentFormSet = inlineformset_factory(
     parent_model=Property,
     model=PropertyDocument,
     form=PropertyDocumentForm,
-    extra=1
+    extra=0
 )
 
 PropertyImageFormSet = inlineformset_factory(

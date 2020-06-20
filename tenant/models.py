@@ -17,6 +17,7 @@ class Tenant(models.Model):
 
 class Notes(models.Model):
     tenant = models.ForeignKey("Tenant", on_delete=models.CASCADE)
+    title = models.CharField(max_length=200)
     note = models.CharField(max_length=2000)
     date_created = models.DateField(auto_now_add=True)
     date_updated = models.DateField(auto_now = True)

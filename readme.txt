@@ -4,7 +4,7 @@ P@55w0rd1
 
 
 todo: Add templates, base template etc
-
+Add Log in functionality
 
 
 Migrations: 
