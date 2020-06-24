@@ -1,0 +1,8 @@
+{% extends 'base/base.html' %}
+{% block content %}
+<h1>Tenants for {{object_list.first.property}}</h1>
+{% for tenant in object_list %}
+    <p>{{tenant.first_name}}</p>
+{% endfor %}
+
+{% endblock %}

@@ -16,6 +16,9 @@ class Address(models.Model):
     def __str__(self):
         return "{0} {1}, {2}".format(self.line1, self.line2, self.line3)
 
+    def __repr__(self):
+        return '{0} ({1})'.format(object.__repr__(self), str(self))
+
 
 class Property(models.Model):
     purchase_date = models.DateField(null=True)
@@ -27,6 +30,12 @@ class Property(models.Model):
 
     class Meta:
         verbose_name_plural = "Properties"
+
+    def __str__(self):
+        return "%s %s %s %s" % (self.address.line1, self.address.line2, self.address.line3, self.address.post_code)
+
+    def __repr__(self):
+        return '{0} ({1})'.format(object.__repr__(self), str(self))
 
 
 def property_image_upload_to(instance, filename):

@@ -1,0 +1,17 @@
+{% extends 'base/base.html' %}
+{% load l10n %}
+{% load project_tags %}
+{% block content %}
+
+    <h1>Tenant Details</h1>
+    <p>{{object.title}} {{object.first_name}} {{object.last_name}}</p>
+    <p>{{object.occupation}}</p>
+    <p>{{object.tenancy_start}}</p>
+    <p>{{object.tenancy_end}}</p>
+    <p>{{object.date_of_birth}}</p>
+    {{object_notes_set}}
+    
+    
+
+
+{% endblock content %}

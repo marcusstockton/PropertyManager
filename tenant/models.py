@@ -13,6 +13,9 @@ class Tenant(models.Model):
 
     def __str__(self):
         return self.first_name + " " + self.last_name
+    
+    def __repr__(self):
+        return '{0} ({1})'.format(object.__repr__(self), str(self))
         
 
 class Notes(models.Model):
@@ -24,3 +27,6 @@ class Notes(models.Model):
 
     class Meta:
         verbose_name_plural = "Notes"
+
+    def __repr__(self):
+        return '{0} ({1})'.format(object.__repr__(self), str(self))
