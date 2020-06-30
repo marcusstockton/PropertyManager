@@ -1,5 +1,5 @@
 SuperUser:
-marcus
+marcus | test@test.com
 P@55w0rd1
 
 

@@ -18,6 +18,8 @@ def index(request):  # not used, but left in for example
 class PortfolioList(LoginRequiredMixin, ListView):
     model = Portfolio
 
+    def get_queryset(self):
+        return Portfolio.objects.filter(user=self.request.user)
 
 class PortfolioView(LoginRequiredMixin, DetailView):
     model = Portfolio

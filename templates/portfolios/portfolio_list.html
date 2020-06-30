@@ -3,7 +3,10 @@
 
 <div>
     <div class="row">
-        <a class="btn btn-primary" href="{% url 'portfolios:portfolio_new' %}">Add Portfolio</a>
+        <div class="col-sm-1 offset-sm-11">
+            <a class="btn btn-primary" href="{% url 'portfolios:portfolio_new' %}"><i class="fa fa-plus" aria-hidden="true"></i> Add Portfolio</a>
+        </div>
+        
     </div>
     <table class="table">
         <thead>
@@ -15,6 +18,7 @@
         </tr>
         </thead>
         <tbody>
+        {% if object_list %}
         {% for portfolio in object_list %}
         <tr>
             <th scope="row">{{portfolio.id}}</th>
@@ -33,6 +37,14 @@
             </td>
         </tr>
         {% endfor%}
+        {% else %}
+        <tr>
+            <td>
+                No portfolio's.
+            </td>
+        </tr>
+            
+        {% endif %}
         </tbody>
     </table>
 </div>

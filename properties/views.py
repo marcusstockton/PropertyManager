@@ -8,6 +8,7 @@ from django.urls import reverse_lazy
 from django.db import transaction
 from .models import Property, Address
 from portfolios.models import Portfolio
+from tenant.models import Tenant, Notes
 from .forms import AddressForm, PropertyForm, PropertyDocumentFormSet, PropertyImageFormSet
 import logging
 
@@ -32,10 +33,7 @@ class PropertyView(DetailView):
 
     def get_context_data(self, **kwargs):
         data = super(PropertyView, self).get_context_data(**kwargs)
-        data["portfolio"] = self.kwargs["portfolio_id"]
-        data['address'] = Address.objects.filter(property=data["property"].id).first()
-
-        logger.info(data['portfolio'])
+        logger.info(data)
         return data
 
 
@@ -47,10 +45,12 @@ class PropertyCreate(CreateView):
     def get_context_data(self, **kwargs):
         data = super(PropertyCreate, self).get_context_data(**kwargs)
         if self.request.POST:
+            logger.info("POST Data: ", self.request.POST)
             data['address'] = AddressForm(self.request.POST)
             data['images'] = PropertyImageFormSet(self.request.POST, self.request.FILES, instance=self.object)
             data['documents'] = PropertyDocumentFormSet(self.request.POST, self.request.FILES, instance=self.object)
         else:
+            logger.info("Data: ", self.object)
             data['address'] = AddressForm()
             data['images'] = PropertyImageFormSet(instance=self.object)
             data['documents'] = PropertyDocumentFormSet(instance=self.object)
@@ -64,6 +64,7 @@ class PropertyCreate(CreateView):
         with transaction.atomic():
             if form.is_valid() and address.is_valid() and images.is_valid() and documents.is_valid():
                 with transaction.atomic():
+                    logger.info("Saving a new property atomically")
                     new_address = address.save()
                     new_property = form.save(commit=False)
                     new_property.address_id = new_address.id
@@ -72,6 +73,12 @@ class PropertyCreate(CreateView):
                     documents.save()
 
         return super(PropertyCreate, self).form_valid(form)
+
+    def get_initial(self):
+        portfolio = get_object_or_404(Portfolio, id=self.kwargs.get('portfolio_id'))
+        return {
+            'portfolio':portfolio,
+        }
 
 
 class PropertyUpdate(UpdateView):
@@ -98,6 +105,7 @@ class PropertyUpdate(UpdateView):
         documents = data['documents']
         with transaction.atomic():
             if form.is_valid() and address.is_valid() and images.is_valid() and documents.is_valid():
+                logger.info("Updating property atomically")
                 # Property
                 updated_property = form.save()
                 # Address

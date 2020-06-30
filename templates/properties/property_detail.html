@@ -25,7 +25,7 @@
         </dl>
     </fieldset>
 </div>
-<div>
+<div class="row">
     {% if object.address %}
     <fieldset class="border p-2">
         <legend class="w-auto">Address</legend>
@@ -53,16 +53,33 @@
     <p>No Address details found.</p>
     {% endif %}
 </div>
-{% if property.tenant_set.all%}
-<div>
-    {% for tenant in property.tenant_set.all.order_by__tenancy_start %}
-    {{tenant.title}}
-    {{tenant.first_name}}
-    {{tenant.last_name}}
-    {{tenant.occupation}}
-    {{tenant.tenancy_start}}
-    {{tenant.tenancy_end}}
-    {{tenant.date_of_birth}}
+{% if object.tenant_set.all%}
+<a href="{% url 'tenants:tenant-create' object.id %}">Create Tenant</a>
+<div class="row">
+    {% for tenant in object.tenant_set.all %}
+    <fieldset class="border p-2">
+        <legend class="w-auto">Tenants ({{object.tenant_set.all.count}})</legend>
+        <div>
+            <a href="{% url 'tenants:tenant-detail' object.id tenant.id %}">View</a>
+            <a href="{% url 'tenants:tenant-update' object.id tenant.id %}">Edit</a>
+        </div>
+        <dl class="row">
+            <dt class="col-sm-3">Name</dt>
+            <dd class="col-sm-9">{{tenant.title}} {{tenant.first_name}} {{tenant.last_name}}</dd>
+
+            <dt class="col-sm-3">Occupation</dt>
+            <dd class="col-sm-9">{{tenant.occupation}}</dd>
+
+            <dt class="col-sm-3">Tenancy Start Date</dt>
+            <dd class="col-sm-9">{{tenant.tenancy_start}}</dd>
+
+            <dt class="col-sm-3">Tenancy End Date</dt>
+            <dd class="col-sm-9">{{tenant.tenancy_end}}</dd>
+
+            <dt class="col-sm-3">Date of Birth</dt>
+            <dd class="col-sm-9">{{tenant.date_of_birth}}</dd>
+        </dl>
+    </fieldset>
     {% endfor %}
 </div>
 {% else %}
@@ -70,28 +87,28 @@
 {% endif %}
 
 {% if property.propertydocument_set.all %}
-<div>
+<div class="row">
     <h5>{{property.propertydocument_set.count}} Documents</h5>
-    {% for doc in property.propertydocument_set.all %}
     <div>
-        <a href="{{ MEDIA_URL }}{{doc.document.url}}">{{doc.filename}}</a>
+        {% for doc in property.propertydocument_set.all %}
+            <a href="{{ MEDIA_URL }}{{doc.document.url}}">{{doc.filename}}</a>
+        {% endfor %}
     </div>
-    {% endfor %}
 </div>
 {% else %}
 <p>No Documents</p>
 {% endif %}
 
-
 {% if property.propertyimage_set.all %}
-<div>
+<div class="row">
     <h5>Images</h5>
-    {%for image in property.propertyimage_set.all %}
-    <img class="col-sm-4 img-fluid img-thumbnail" src="{{ image.image.url }}" alt="image.image">
-    {% endfor %}
+    <div>
+        {%for image in property.propertyimage_set.all %}
+            <img class="col-sm-4 img-fluid img-thumbnail" src="{{ image.image.url }}" alt="image.image">
+        {% endfor %}
+    </div>
 </div>
 {% endif %}
-
 <div class="row">
     <a href="{% url 'properties:property_edit' object.portfolio.id object.id %}" class="btn btn-info">Edit</a>
 </div>
