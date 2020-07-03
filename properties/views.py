@@ -1,30 +1,42 @@
-from django.contrib import messages
-from django.http import HttpResponseRedirect
-from django.shortcuts import render
-from django.views.generic import ListView, DetailView
-from django.db import transaction, IntegrityError
+from django.shortcuts import render, get_object_or_404
+from django.views.generic import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.db import transaction
+from django.contrib.auth.decorators import login_required
 from .models import Property, Address
 from portfolios.models import Portfolio
-from tenant.models import Tenant, Notes
 from .forms import AddressForm, PropertyForm, PropertyDocumentFormSet, PropertyImageFormSet
+from .tables import PropertyTable
+from django.contrib.auth.mixins import LoginRequiredMixin
 import logging
-
+from django_tables2 import SingleTableView
+import pdb
 logger = logging.getLogger(__name__)
 
 
+@login_required
 def index(request):
     return render(request, 'properties/index.html', {})
 
 
-class PropertyList(ListView):
-    model = Property
+# @login_required
+# def property_list(request, portfolio_id):
+#     table = PropertyTable(Property.objects
+#                           .filter(portfolio_id=portfolio_id)
+#                           .filter(portfolio__user=request.user))
 
-    def get_context_data(self, **kwargs):
-        data = super(PropertyList, self).get_context_data(**kwargs)
-        return data
+#     return render(request, 'properties/property_list.html', {'table': table})
+
+
+class PropertyList(SingleTableView, LoginRequiredMixin):
+    model = Property
+    table_class = PropertyTable
+
+    def get_queryset(self):
+        portfolio_id = self.kwargs['portfolio_id']
+        qs = Property.objects.filter(portfolio_id=portfolio_id).filter(portfolio__user=self.request.user)
+        return qs
 
 
 class PropertyView(DetailView):
@@ -77,7 +89,7 @@ class PropertyCreate(CreateView):
     def get_initial(self):
         portfolio = get_object_or_404(Portfolio, id=self.kwargs.get('portfolio_id'))
         return {
-            'portfolio':portfolio,
+            'portfolio': portfolio,
         }
 
 

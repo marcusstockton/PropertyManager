@@ -18,10 +18,14 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 from django.views.static import serve
+from django_registration.backends.one_step.views import RegistrationView
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('accounts/register/',
+         RegistrationView.as_view(success_url='/'),
+         name='django_registration_register'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('', include('portfolios.urls')),
     path('properties/', include('properties.urls')),

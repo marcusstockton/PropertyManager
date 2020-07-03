@@ -6,6 +6,9 @@ class Portfolio(models.Model):
     name = models.CharField(max_length=100)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
+    def property_count(self):
+        return self.property_set.count()
+
     def __str__(self):
         return self.name
         

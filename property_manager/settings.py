@@ -49,7 +49,8 @@ INSTALLED_APPS = [
     'tenant',
 
     'crispy_forms',
-    'debug_toolbar'
+    'debug_toolbar',
+    'django_tables2'
 ]
 
 MIDDLEWARE = [
@@ -134,6 +135,8 @@ USE_TZ = True
 USE_THOUSAND_SEPARATOR = True
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+DJANGO_TABLES2_TEMPLATE = "django_tables2/bootstrap4.html"
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
