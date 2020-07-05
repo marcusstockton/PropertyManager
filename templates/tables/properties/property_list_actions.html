@@ -1,0 +1,3 @@
+<a class="btn btn-primary btn-sm" href="{% url 'properties:property_view' record.portfolio.id record.id %}" data-toggle="tooltip" title="View Property"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
+<a class="btn btn-info btn-sm" href="{% url 'properties:property_edit' record.portfolio.id record.id %}" data-toggle="tooltip" title="Edit Property"><i class="fas fa-edit" aria-hidden="true"></i> Edit</a>
+<a class="btn btn-danger btn-sm" href="{% url 'properties:property_delete' record.portfolio.id record.id %}" data-toggle="tooltip" title="Delete Property"><i class="fa fa-trash" aria-hidden="true"></i></a>
