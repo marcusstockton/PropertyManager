@@ -1,1 +1,4 @@
-<a class="btn btn-primary btn-sm" href="{% url 'properties:property_list' record.id %}" data-toggle="tooltip" title="View Properties"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
+<a class="btn btn-primary btn-sm" href="{% url 'properties:property_list' record.id %}" data-toggle="tooltip" title="View Properties"><i class="fa fa-list-alt" aria-hidden="true"></i></a>
+<a class="btn btn-primary btn-sm" href="{% url 'portfolios:portfolio_view' record.id %}" data-toggle="tooltip" title="View Portfolio"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
+<a class="btn btn-info btn-sm" href="{% url 'portfolios:portfolio_edit' record.id %}" data-toggle="tooltip" title="Edit Portfolio"><i class="fas fa-edit" aria-hidden="true"></i></a>
+<a class="btn btn-danger btn-sm" href="{% url 'portfolios:portfolio_delete' record.id %}" data-toggle="tooltip" title="Delete Portfolio"><i class="fa fa-trash" aria-hidden="true"></i></a>
