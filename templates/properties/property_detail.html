@@ -54,31 +54,40 @@
     {% endif %}
 </div>
 {% if object.tenant_set.all%}
-<a href="{% url 'tenants:tenant-create' object.id %}">Create Tenant</a>
+<a href="{% url 'tenants:tenant-create' object.portfolio.id object.id %}">Create Tenant</a>
 <div class="row">
     {% for tenant in object.tenant_set.all %}
     <fieldset class="border p-2">
         <legend class="w-auto">Tenants ({{object.tenant_set.all.count}})</legend>
         <div>
-            <a href="{% url 'tenants:tenant-detail' object.id tenant.id %}">View</a>
-            <a href="{% url 'tenants:tenant-update' object.id tenant.id %}">Edit</a>
+            <a href="{% url 'tenants:tenant-detail' object.portfolio.id object.id tenant.id %}">View</a>
+            <a href="{% url 'tenants:tenant-update' object.portfolio.id object.id tenant.id %}">Edit</a>
         </div>
-        <dl class="row">
-            <dt class="col-sm-3">Name</dt>
-            <dd class="col-sm-9">{{tenant.title}} {{tenant.first_name}} {{tenant.last_name}}</dd>
+        <div class="row">
+            <div class="col-sm-8">
+                <dl>
+                    <dt class="col-sm-3">Name</dt>
+                    <dd class="col-sm-9">{{tenant.title}} {{tenant.first_name}} {{tenant.last_name}}</dd>
+        
+                    <dt class="col-sm-3">Occupation</dt>
+                    <dd class="col-sm-9">{{tenant.occupation}}</dd>
+        
+                    <dt class="col-sm-3">Tenancy Start Date</dt>
+                    <dd class="col-sm-9">{{tenant.tenancy_start}}</dd>
+        
+                    <dt class="col-sm-3">Tenancy End Date</dt>
+                    <dd class="col-sm-9">{{tenant.tenancy_end}}</dd>
+        
+                    <dt class="col-sm-3">Date of Birth</dt>
+                    <dd class="col-sm-9">{{tenant.date_of_birth}}</dd>
+                </dl>
+            </div>
+            <div class="col-sm-4">
+                <img class="col-sm-8 img-fluid img-thumbnail" src="{{ tenant.image.url }}" alt="image.image">
+            </div>
+        </div>
 
-            <dt class="col-sm-3">Occupation</dt>
-            <dd class="col-sm-9">{{tenant.occupation}}</dd>
-
-            <dt class="col-sm-3">Tenancy Start Date</dt>
-            <dd class="col-sm-9">{{tenant.tenancy_start}}</dd>
-
-            <dt class="col-sm-3">Tenancy End Date</dt>
-            <dd class="col-sm-9">{{tenant.tenancy_end}}</dd>
-
-            <dt class="col-sm-3">Date of Birth</dt>
-            <dd class="col-sm-9">{{tenant.date_of_birth}}</dd>
-        </dl>
+        
     </fieldset>
     {% endfor %}
 </div>

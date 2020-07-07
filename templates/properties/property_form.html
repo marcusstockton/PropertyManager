@@ -2,13 +2,7 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-<span>
-    {% if messages %}
-        {% for message in messages %}
-            alert(message);
-        {% endfor %}
-    {% endif %}
-</span>
+
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form |crispy }}

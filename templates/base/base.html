@@ -11,6 +11,7 @@
   <body>
     {% include 'base/_navbar.html' %}
     <div class="container">
+          {% include 'base/_messages.html' %}
           {% block content %}
           {% endblock content %}
     </div>

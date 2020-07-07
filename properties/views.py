@@ -1,3 +1,4 @@
+from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -49,10 +50,11 @@ class PropertyView(DetailView):
         return data
 
 
-class PropertyCreate(CreateView):
+class PropertyCreate(SuccessMessageMixin, CreateView):
     model = Property
     form_class = PropertyForm
     success_url = reverse_lazy('portfolios:portfolio_list')
+    success_message = 'Property successfully created!!!!'
 
     def get_context_data(self, **kwargs):
         data = super(PropertyCreate, self).get_context_data(**kwargs)
@@ -73,16 +75,25 @@ class PropertyCreate(CreateView):
         address = data["address"]
         images = data["images"]
         documents = data['documents']
-        with transaction.atomic():
-            if form.is_valid() and address.is_valid() and images.is_valid() and documents.is_valid():
-                with transaction.atomic():
-                    logger.info("Saving a new property atomically")
-                    new_address = address.save()
-                    new_property = form.save(commit=False)
-                    new_property.address_id = new_address.id
-                    new_property.save()
-                    images.save()
-                    documents.save()
+        if form.is_valid() and address.is_valid():
+            with transaction.atomic():
+                logger.info("Saving a new property atomically")
+                new_address = address.save()
+                new_property = form.save(commit=False)
+                new_property.address = new_address
+                new_property.save()
+                if images.is_valid():
+                    logger.info("Image form is valid")
+                    property_images = images.save(commit=False)
+                    for property_image in property_images:
+                        property_image.property_id = new_property.id
+                        property_image.save()
+                if documents.is_valid():
+                    logger.info("Document form is valid")
+                    property_docs = documents.save(commit=False)
+                    for property_doc in property_docs:
+                        property_doc.property_id = new_property.id
+                        property_doc.save()
 
         return super(PropertyCreate, self).form_valid(form)
 
@@ -93,15 +104,16 @@ class PropertyCreate(CreateView):
         }
 
 
-class PropertyUpdate(UpdateView):
+class PropertyUpdate(SuccessMessageMixin, UpdateView):
     model = Property
     form_class = PropertyForm
     success_url = reverse_lazy('portfolios:portfolio_list')
+    success_message = 'Property successfully updated!!!!'
 
     def get_context_data(self, **kwargs):
         data = super(PropertyUpdate, self).get_context_data(**kwargs)
         if self.request.POST:
-            data['address'] = AddressForm(self.request.POST, instance=self.object)
+            data['address'] = AddressForm(self.request.POST, instance=self.object.address)
             data['images'] = PropertyImageFormSet(self.request.POST, self.request.FILES, instance=self.object)
             data['documents'] = PropertyDocumentFormSet(self.request.POST, self.request.FILES, instance=self.object)
         else:
@@ -112,29 +124,32 @@ class PropertyUpdate(UpdateView):
 
     def form_valid(self, form):
         data = self.get_context_data()
-        address = data["address"]
+        address_form = data["address"]
         images = data["images"]
         documents = data['documents']
         with transaction.atomic():
-            if form.is_valid() and address.is_valid() and images.is_valid() and documents.is_valid():
+            if form.is_valid() and address_form.is_valid():
                 logger.info("Updating property atomically")
-                # Property
-                updated_property = form.save()
-                # Address
-                address.instance = updated_property
-                address.save()
-                # Images
-                images.instance = updated_property
-                images.save()
-                # Documents
-                documents.instance = updated_property
-                documents.save()
+                self.object = form.save()
+                address_form.save()
+
+                if images.is_valid():
+                    # Images
+                    images.instance = self.object
+                    images.save()
+
+                if documents.is_valid():
+                    # Documents
+                    documents.instance = self.object
+                    documents.save()
+                    
         return super(PropertyUpdate, self).form_valid(form)
 
 
-class PropertyDelete(DeleteView):
+class PropertyDelete(SuccessMessageMixin, DeleteView):
     model = Property
     success_url = reverse_lazy('properties:property_list')
+    success_message = 'Property successfully deleted!!!!'
 
     def get_context_data(self, **kwargs):
         data = super(PropertyDelete, self).get_context_data(**kwargs)
